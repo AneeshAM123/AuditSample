@@ -61,7 +61,7 @@
                 <Button
                     Grid.Column="1"
                     Style="{StaticResource SortButtonStyle}"
-                    Text="BDD"
+                    Text="{x:Static helpers:Constants.BDDText}"
                     Command="{Binding BindingContext.SortCommand,Source={x:Reference homePage}}"/>
                 <Image
                     Grid.Column="2"

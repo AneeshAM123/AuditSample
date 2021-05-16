@@ -9,6 +9,7 @@
         public const string About = "About";
         public const string Logout = "Logout";
         public const string Home = "Home";
+        public const string BDDText = "BDD";
         #endregion
 
         #region Icons
