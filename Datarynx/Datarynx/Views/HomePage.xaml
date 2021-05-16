@@ -67,7 +67,7 @@
                     Grid.Column="2"
                     HeightRequest="25"
                     WidthRequest="25"
-                    Source="{x:Static helpers:Constants.SortDown}">
+                    Source="sortDown.png">
                     <Image.Triggers>
                         <DataTrigger
                             TargetType="Image"
@@ -75,7 +75,7 @@
                             Value="true">
                             <Setter
                                 Property="Source"
-                                Value="{x:Static helpers:Constants.SortUp}"/>
+                                Value="sortUp.png"/>
                         </DataTrigger>
                     </Image.Triggers>
                 </Image>
