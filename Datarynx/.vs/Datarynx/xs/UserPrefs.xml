@@ -1,0 +1,27 @@
+﻿<Properties StartupConfiguration="{B8BD163D-19BA-4360-9C8E-5E721E30C3F9}|Default" HasHotReloadOverlayBeenDismissed="True">
+  <MonoDevelop.Ide.ItemProperties.Datarynx.Android TriggeredFromHotReload="False" PreferredExecutionTarget="Android.Nexus_5X_API_30" />
+  <MonoDevelop.Ide.ItemProperties.Datarynx.iOS TriggeredFromHotReload="False" PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.D8F6D099-0B92-4C2F-AE91-CAA9269A60C8" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Datarynx/App.xaml">
+    <Files>
+      <File FileName="Datarynx/Views/HomePage.xaml" Line="34" Column="34" />
+      <File FileName="Datarynx/ViewModels/HomePageViewModel.cs" Line="15" Column="6" />
+      <File FileName="Datarynx.iOS/Main.cs" Line="21" Column="1" />
+      <File FileName="Datarynx/App.xaml" Line="13" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="Datarynx" expanded="True">
+            <Node name="Datarynx.iOS" expanded="True" />
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>

@@ -1,0 +1,195 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="Datarynx.Views.HomePage"
+    xmlns:base="clr-namespace:Datarynx.Views"
+    xmlns:helpers="clr-namespace:Datarynx.Helpers"
+    xmlns:controls="clr-namespace:Datarynx.CustomControls"
+    xmlns:converters="clr-namespace:Datarynx.Converters"
+    BackgroundColor="White"
+    x:Name="homePage">
+    <NavigationPage.TitleView>
+        <Grid
+            Padding="12,0,12,0"
+            ColumnSpacing="12">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <ImageButton
+                Source="{x:Static helpers:Constants.Menu}"
+                Style="{StaticResource NavigationBarIconStyle}"
+                Command="{Binding MenuCommand}"/>
+            <Label
+                Grid.Column="1"
+                VerticalOptions="Center"
+                Style="{StaticResource Black16BoldLabelStyle}"
+                Text="{x:Static helpers:Constants.ToDoList}"/>
+            <BoxView
+                Grid.Column="2"
+                VerticalOptions="Center"
+                HorizontalOptions="Start"
+                Style="{StaticResource StatusIconStyle}"/>
+            <ImageButton
+                Source="{x:Static helpers:Constants.Refresh}"
+                Grid.Column="3"
+                Style="{StaticResource NavigationBarIconStyle}"/>
+            <ImageButton
+                Grid.Column="4"
+                Source="{x:Static helpers:Constants.Filter}"
+                Style="{StaticResource NavigationBarIconStyle}"/>
+        </Grid>
+    </NavigationPage.TitleView>
+    <ContentPage.Resources>
+        <ControlTemplate x:Key="auditheadertemplate">
+            <Grid
+                Padding="8,0,8,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Label
+                    VerticalOptions="Center"
+                    Style="{StaticResource Gray13LabelStyle}"
+                    Text="{x:Static helpers:Constants.SortBy}"/>
+                <Button
+                    Grid.Column="1"
+                    Style="{StaticResource SortButtonStyle}"
+                    Text="BDD"
+                    Command="{Binding BindingContext.SortCommand,Source={x:Reference homePage}}"/>
+                <Image
+                    Grid.Column="2"
+                    HeightRequest="25"
+                    WidthRequest="25"
+                    Source="{x:Static helpers:Constants.SortDown}">
+                    <Image.Triggers>
+                        <DataTrigger
+                            TargetType="Image"
+                            Binding="{Binding BindingContext.SortByAscending,Source={x:Reference homePage}}"
+                            Value="true">
+                            <Setter
+                                Property="Source"
+                                Value="{x:Static helpers:Constants.SortUp}"/>
+                        </DataTrigger>
+                    </Image.Triggers>
+                </Image>
+                <controls:RoundedLabel
+                    Grid.Column="3"
+                    HorizontalOptions="End"
+                    VerticalOptions="Center"
+                    Margin="4,0"
+                    ContentText="?"
+                    ContentColor="Black"/>
+            </Grid>
+        </ControlTemplate>
+        <DataTemplate x:Key="auditItemtemplate">
+            <Grid
+              VerticalOptions="Start"
+              RowSpacing="8"
+              Padding="8,16,8,16"
+              BackgroundColor="{StaticResource CardGrayColor}">
+              <Grid.RowDefinitions>
+                  <RowDefinition Height="Auto"/>
+                  <RowDefinition Height="Auto"/>
+                  <RowDefinition Height="Auto"/>
+                  <RowDefinition Height="Auto"/>
+                  <RowDefinition Height="Auto"/>
+              </Grid.RowDefinitions>
+              <Grid.ColumnDefinitions>
+                  <ColumnDefinition Width="*"/>
+                  <ColumnDefinition Width="Auto"/>
+              </Grid.ColumnDefinitions>
+             <Label
+                  Grid.Row="0"
+                  Grid.Column="0"
+                  Text="{Binding WeekNumber}"
+                  Style="{StaticResource Gray13LabelStyle}"/>
+              <controls:RoundedLabel
+                  Grid.RowSpan="2"
+                  Grid.Column="1"
+                  HorizontalOptions="End"
+                  VerticalOptions="Start"
+                  Margin="4,0"
+                  ContentText="1">
+                  <controls:RoundedLabel.ContentColor>
+                      <Binding Path="TaskState">
+                          <Binding.Converter>
+                              <converters:TaskStateToObjectConverter
+                                     x:TypeArguments="Color"
+                                     NotStartedObject="{StaticResource GreenColor}"
+                                     InProgressObject="{StaticResource GrayColor}"/>
+                             </Binding.Converter>
+                         </Binding>
+                     </controls:RoundedLabel.ContentColor>
+                 </controls:RoundedLabel>
+                 <Label
+                     Grid.Row="1"
+                     Grid.ColumnSpan="2"
+                     Style="{StaticResource Gray13LabelStyle}"
+                     Text="{Binding WeekDate,StringFormat='{0:MM-dd}'}"/>
+                 <Label
+                     Grid.Row="2"
+                     Grid.ColumnSpan="2"
+                     Text="{Binding StoreName}"
+                     Style="{StaticResource Black16BoldLabelStyle}"
+                     LineBreakMode="TailTruncation"/>
+                 <Label
+                     Grid.Row="3"
+                     Grid.ColumnSpan="2"
+                     Style="{StaticResource Black16BoldLabelStyle}"
+                     LineBreakMode="TailTruncation"
+                     Text="{Binding StoreAddress}"/>
+                 <Label
+                     Grid.Row="4"
+                     Grid.ColumnSpan="2"
+                     VerticalOptions="Center"
+                     Style="{StaticResource Gray13LabelStyle}"
+                     Text="{Binding CodingType}"/>
+                 <Button
+                     Grid.Row="4"
+                     Grid.Column="1"
+                     Text="{x:Static helpers:Constants.StartAudit}"
+                     HorizontalOptions="End"
+                     VerticalOptions="Center"
+                     Margin="4,0"
+                     Style="{StaticResource AuditButtonStyle}">
+                     <Button.IsVisible>
+                         <Binding Path="TaskState">
+                             <Binding.Converter>
+                                 <converters:TaskStateToObjectConverter
+                                     x:TypeArguments="x:Boolean"
+                                     NotStartedObject="true"
+                                     InProgressObject="false"/>
+                             </Binding.Converter>
+                         </Binding>
+                     </Button.IsVisible>
+                 </Button>
+             </Grid>
+        </DataTemplate>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <Grid Padding="20,0,20,0">
+            <CollectionView
+                ItemsSource="{Binding Audits}"
+                RemainingItemsThreshold="{Binding Threshold}"
+                RemainingItemsThresholdReachedCommand="{Binding RemainingItemsThresholdReachedCommand}"
+                ItemTemplate="{StaticResource auditItemtemplate}">
+                <CollectionView.Header>
+                    <ContentView
+                        ControlTemplate="{StaticResource auditheadertemplate}"/>
+                </CollectionView.Header>
+                 <CollectionView.ItemsLayout>
+                    <LinearItemsLayout
+                        Orientation="Vertical"
+                        ItemSpacing="10"/>
+                 </CollectionView.ItemsLayout>
+            </CollectionView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
