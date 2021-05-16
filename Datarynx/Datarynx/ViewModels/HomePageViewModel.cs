@@ -13,7 +13,7 @@ namespace Datarynx.ViewModel
 {
     public class HomePageViewModel : BaseViewModel
     {
-        List<Audit> AllAudtis;
+        List<Audit> _allAudits;
         #region Properties
         ObservableCollection<Audit> audits;
         public ObservableCollection<Audit> Audits
@@ -64,8 +64,8 @@ namespace Datarynx.ViewModel
         private void GetAudits()
         {
             var dataService = DependencyService.Get<IDataService>();
-            AllAudtis = dataService.GetAudits();
-            Audits = new ObservableCollection<Audit>(AllAudtis.Take(threshold));
+            _allAudits = dataService.GetAudits();
+            Audits = new ObservableCollection<Audit>(_allAudits.Take(threshold));
         }
         #endregion
 
@@ -75,20 +75,20 @@ namespace Datarynx.ViewModel
             SortByAscending = !SortByAscending;
             if (SortByAscending)
             {
-                AllAudtis = new List<Audit>(AllAudtis.OrderBy(x => x.WeekDate));
+                _allAudits = new List<Audit>(_allAudits.OrderBy(x => x.WeekDate));
             }
             else
             {
-                AllAudtis = new List<Audit>(AllAudtis.OrderByDescending(x => x.WeekDate));
+                _allAudits = new List<Audit>(_allAudits.OrderByDescending(x => x.WeekDate));
             }
-            Audits = new ObservableCollection<Audit>(AllAudtis.Take(threshold));
+            Audits = new ObservableCollection<Audit>(_allAudits.Take(threshold));
         }
 
         private void ExecuteRemainingItemsThresholdReachedCommand()
         {
             try
             {
-                var nextItems = AllAudtis.GetRange(Audits.Count - 1, threshold);
+                var nextItems = _allAudits.GetRange(Audits.Count - 1, threshold);
                 nextItems?.ForEach((item) =>
                 {
                      Audits?.Add(item);
