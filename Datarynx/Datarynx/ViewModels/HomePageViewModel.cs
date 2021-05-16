@@ -50,7 +50,7 @@ namespace Datarynx.ViewModel
             MenuCommand = new Command(async () => { await ExecuteMenuCommand(); });
             SortCommand = new Command(ExecuteSortCommand);
             RemainingItemsThresholdReachedCommand = new Command(ExecuteRemainingItemsThresholdReachedCommand);
-            GetAudtits();
+            GetAudits();
         }
         #endregion
 
@@ -61,7 +61,7 @@ namespace Datarynx.ViewModel
 
         #region LoadData
 
-        private void GetAudtits()
+        private void GetAudits()
         {
             var dataService = DependencyService.Get<IDataService>();
             AllAudtis = dataService.GetAudits();
